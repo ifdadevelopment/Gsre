@@ -1,9 +1,9 @@
 import React from 'react'
-
-const page = () => {
+import AboutIntro from '../components/AboutIntro'
+export default function AboutUs() {
   return (
-    <div>page</div>
+    <main className='pageOffset'>
+      <AboutIntro />
+    </main>
   )
 }
-
-export default page

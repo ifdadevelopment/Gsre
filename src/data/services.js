@@ -257,3 +257,21 @@ export const TABS = [
   },
 ];
 
+export const galleryImages = [
+  {
+    src: "/services/VRV.png",
+    alt: "VRV Air Conditioning System Installation",
+  },
+  {
+    src: "/services/Duct.png",
+    alt: "Ductable Air Conditioning System",
+  },
+  {
+    src: "/services/HVAC.png",
+    alt: "HVAC System Design and Installation",
+  },
+  {
+    src: "/services/centralized.png",
+    alt: "Centralized Air Conditioning System",
+  },
+];

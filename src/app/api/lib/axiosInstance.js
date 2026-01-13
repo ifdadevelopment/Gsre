@@ -1,5 +1,6 @@
 import axios from "axios";
 
+console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 
 const getBaseURL = () => {
   if (process.env.NODE_ENV === "production") {
@@ -17,14 +18,12 @@ const axiosInstance = axios.create({
   timeout: 10000,
 });
 
-
 axiosInstance.interceptors.request.use(
   (config) => {
     return config;
   },
   (error) => Promise.reject(error)
 );
-
 
 axiosInstance.interceptors.response.use(
   (response) => response,
