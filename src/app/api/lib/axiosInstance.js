@@ -1,20 +1,16 @@
 import axios from "axios";
+
+const baseURL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
+console.log("API BASE URL:", baseURL);
+
 const axiosInstance = axios.create({
-  baseURL: "",
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 10000,
+  timeout: 15000,
 });
-
-axiosInstance.interceptors.request.use(
-  (config) => config,
-  (error) => Promise.reject(error)
-);
-
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => Promise.reject(error)
-);
 
 export default axiosInstance;
