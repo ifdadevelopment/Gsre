@@ -2,8 +2,14 @@ import { services } from "@/data/services";
 import { notFound } from "next/navigation";
 import ServicesGallery from "./ServicesGallery";
 
+
+export async function generateStaticParams() {
+  return services.map((service) => ({
+    slug: service.slug,
+  }));
+}
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug } = await params; 
 
   const service = services.find((item) => item.slug === slug);
 
@@ -19,20 +25,23 @@ export async function generateMetadata({ params }) {
     metadataBase: new URL("https://www.gsrefrigeration.com"),
     title: `${service.title} | GS Refrigeration Enterprises`,
     description: service.description,
+
     alternates: {
       canonical: `/services/${service.slug}`,
     },
+
     openGraph: {
       title: `${service.title} | GS Refrigeration Enterprises`,
       description: service.description,
+      type: "website",
       images: service.images.map((img) => ({
         url: img,
         width: 1200,
         height: 630,
         alt: service.title,
       })),
-      type: "website",
     },
+
     twitter: {
       card: "summary_large_image",
       title: `${service.title} | GS Refrigeration Enterprises`,
@@ -43,7 +52,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ServiceDetail({ params }) {
-  const { slug } = await params;
+  const { slug } = await params; 
 
   const service = services.find((item) => item.slug === slug);
 
@@ -52,12 +61,14 @@ export default async function ServiceDetail({ params }) {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-6xl mx-auto px-4">
+
         {service.images?.length > 0 && (
           <ServicesGallery
             images={service.images}
             title={service.title}
           />
         )}
+
         <h1 className="text-3xl md:text-4xl font-bold mt-14 mb-3">
           {service.title}
         </h1>

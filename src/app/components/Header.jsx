@@ -49,7 +49,7 @@ const Header = () => {
 
           <span className="hidden md:flex font-bold text-md global-color">GS Refrigeration Enterprises</span>
         </Link>
-        <nav className="hidden md:flex gap-6 text-md font-medium global-secondary-color">
+        <nav className="hidden md:flex gap-6 text-md font-semibold global-secondary-color">
           <Link href="/">Home</Link>
           <Link href="/about-us">About Us</Link>
           <Link href="/services">Services</Link>

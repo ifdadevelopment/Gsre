@@ -1,20 +1,28 @@
 import { NextResponse } from "next/server";
-import { createContact, getContacts } from "../controllers/contact.controller";
-
-
+import { connectDB } from "../lib/Db";
+import Contact from "../models/contact.model.js";
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { fullName, phone, email, service, message, reminder } = body;
+    await connectDB();
 
-    if (!fullName || !email || !service || !message) {
+    const body = await req.json();
+
+    const {
+      fullName,
+      phone,
+      email,
+      service,
+      message,
+      reminder,
+    } = body;
+    if (!fullName || !phone || !email || !service || !message) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        { success: false, message: "All fields are required" },
         { status: 400 }
       );
     }
 
-    await createContact({
+    await Contact.create({
       fullName,
       phone,
       email,
@@ -28,26 +36,10 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("CONTACT POST ERROR:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function GET() {
-  try {
-    const contacts = await getContacts();
+    console.error("CONTACT API ERROR:", error);
 
     return NextResponse.json(
-      { success: true, data: contacts },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("CONTACT GET ERROR:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
+      { success: false, message: "Server Error" },
       { status: 500 }
     );
   }

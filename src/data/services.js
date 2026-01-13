@@ -4,7 +4,7 @@ export const services = [
     title: "Maintenance & Repairs",
     slug: "maintenance-repairs",
     subtitle: "GS Refrigeration Enterprises",
-    image: "/services/VRV.png", // primary image
+    image: "/services/VRV.png", 
     images: [
       "/services/VRV.png",
       "/services/HVAC.png",

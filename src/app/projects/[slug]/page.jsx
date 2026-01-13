@@ -3,8 +3,15 @@ import { notFound } from "next/navigation";
 import ProjectGallery from "./ProjectGallery";
 
 
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
+
+
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug } = await params; 
 
   const project = projects.find((p) => p.slug === slug);
 
@@ -20,9 +27,11 @@ export async function generateMetadata({ params }) {
     metadataBase: new URL("https://www.gsrefrigeration.com"),
     title: `${project.name} Project | GS Refrigeration Enterprises`,
     description: project.description,
+
     alternates: {
       canonical: `/projects/${project.slug}`,
     },
+
     openGraph: {
       title: `${project.name} | GS Refrigeration Enterprises`,
       description: project.description,
@@ -34,6 +43,7 @@ export async function generateMetadata({ params }) {
         alt: project.name,
       })),
     },
+
     twitter: {
       card: "summary_large_image",
       title: `${project.name} | GS Refrigeration Enterprises`,
@@ -43,8 +53,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
+
 export default async function ProjectDetail({ params }) {
-  const { slug } = await params;
+  const { slug } = await params; 
 
   const project = projects.find((p) => p.slug === slug);
 
@@ -53,7 +64,12 @@ export default async function ProjectDetail({ params }) {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
-        <ProjectGallery images={project.images} title={project.name} />
+
+        <ProjectGallery
+          images={project.images}
+          title={project.name}
+        />
+
         <h1 className="text-4xl font-bold mt-12 mb-2">
           {project.name}
         </h1>
@@ -72,6 +88,7 @@ export default async function ProjectDetail({ params }) {
         <p className="text-gray-700 leading-relaxed max-w-4xl">
           {project.description}
         </p>
+
       </div>
     </section>
   );

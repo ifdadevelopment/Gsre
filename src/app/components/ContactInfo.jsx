@@ -112,8 +112,6 @@ const ContactInfo = () => {
                             placeholder="Enter your email address"
                             onChange={handleChange}
                         />
-
-                        {/* SERVICE */}
                         <div>
                             <label className="block text-sm font-semibold text-gray-700">
                                 Select Service <span className="text-red-500">*</span>
