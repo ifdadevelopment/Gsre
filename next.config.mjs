@@ -1,14 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-
-  reactCompiler: true, 
+  reactCompiler: true,
 
   images: {
-    unoptimized: true, 
+    domains: [],
   },
-
-  trailingSlash: true, 
 };
 
 export default nextConfig;
