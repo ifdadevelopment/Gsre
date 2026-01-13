@@ -145,11 +145,9 @@ export const projects = [
     id: 1,
     city: "Chandigarh",
     name: "Grazitti",
-    area: "150000 Sq Ft",
-    image: "/projects/Centralized.png", 
+    area: "150,000 Sq Ft",
+    image: "/projects/Centralized.png",
     images: [
-      "/projects/Centralized.png",
-      "/projects/Centralized.png",
       "/projects/Centralized.png",
       "/projects/Centralized.png",
       "/projects/Centralized.png",
@@ -164,22 +162,16 @@ export const projects = [
     year: 2022,
     status: "Completed",
     description:
-      "Design and execution of a centralized air conditioning system for a large corporate workspace ensuring optimal cooling efficiency and energy savings.",
+      "Design and execution of a centralized HVAC system for a large corporate workspace, optimized for energy efficiency and uniform cooling.",
   },
 
   {
     id: 2,
     city: "Hyderabad",
     name: "Technip",
-    area: "225000 Sq Ft",
+    area: "225,000 Sq Ft",
     image: "/projects/Duct.png",
     images: [
-      "/projects/Duct.png",
-      "/projects/Duct.png",
-      "/projects/Duct.png",
-      "/projects/Duct.png",
-      "/projects/Duct.png",
-      "/projects/Duct.png",
       "/projects/Duct.png",
       "/projects/Duct.png",
       "/projects/Duct.png",
@@ -192,9 +184,94 @@ export const projects = [
     year: 2023,
     status: "Completed",
     description:
-      "Implemented a high-capacity ductable HVAC solution for a multi-floor office building with precise airflow management and climate control.",
+      "High-capacity ductable HVAC system implemented across multiple floors with precision airflow and advanced climate control.",
+  },
+
+  {
+    id: 3,
+    city: "Pune",
+    name: "Infosys Campus",
+    area: "300,000 Sq Ft",
+    image: "/projects/VRV.png",
+    images: [
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+    ],
+    slug: "infosys-pune",
+    systemType: "VRV / VRF System",
+    year: 2021,
+    status: "Completed",
+    description:
+      "VRV-based air conditioning system designed for flexible zoning, lower energy consumption, and long-term operational efficiency.",
+  },
+
+  {
+    id: 4,
+    city: "Delhi",
+    name: "TCS Office",
+    area: "180,000 Sq Ft",
+    image: "/projects/HVAC.png",
+    images: [
+      "/projects/HVAC.png",
+      "/projects/HVAC.png",
+      "/projects/HVAC.png",
+      "/projects/HVAC.png",
+      "/projects/HVAC.png",
+    ],
+    slug: "tcs-delhi",
+    systemType: "Integrated HVAC Solution",
+    year: 2020,
+    status: "Completed",
+    description:
+      "End-to-end HVAC solution including ventilation, air handling units, and temperature control systems.",
+  },
+
+  {
+    id: 5,
+    city: "Noida",
+    name: "Samsung R&D Center",
+    area: "250,000 Sq Ft",
+    image: "/projects/VRV.png",
+    images: [
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+      "/projects/VRV.png",
+    ],
+    slug: "samsung-noida",
+    systemType: "Chiller & Ventilation System",
+    year: 2023,
+    status: "Completed",
+    description:
+      "Installation of advanced chiller plant and ventilation systems for high-performance research facilities.",
+  },
+
+  {
+    id: 6,
+    city: "Bengaluru",
+    name: "Wipro Tech Park",
+    area: "275,000 Sq Ft",
+    image: "/projects/Centralized.png",
+    images: [
+      "/projects/Centralized.png",
+      "/projects/Centralized.png",
+      "/projects/Centralized.png",
+      "/projects/Centralized.png",
+    ],
+    slug: "wipro-bengaluru",
+    systemType: "AMC & Preventive Maintenance",
+    year: 2024,
+    status: "Ongoing",
+    description:
+      "Annual Maintenance Contract covering preventive maintenance, performance optimization, and rapid response support.",
   },
 ];
+
 
 
 
