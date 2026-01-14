@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { connectDB } from "../../lib/Db";
 import User from "../../models/User";
-
+      
 
 export async function POST(req) {
   try {
@@ -34,11 +34,16 @@ export async function POST(req) {
       );
     }
 
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET missing");
+    }
+
     const token = jwt.sign(
       { id: user._id, user_type: user.user_type },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
+
     const response = NextResponse.json({
       success: true,
       message: "Login successful",
@@ -49,20 +54,20 @@ export async function POST(req) {
         user_type: user.user_type,
       },
     });
-
     response.cookies.set("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: true,        
+      sameSite: "lax",      
       path: "/",
-      maxAge: 60 * 60 * 24, 
+      maxAge: 60 * 60 * 24,
     });
 
     return response;
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
+    console.error("LOGIN ERROR:", error.message);
+
     return NextResponse.json(
-      { success: false, message: "Server error" },
+      { success: false, message: "Login failed" },
       { status: 500 }
     );
   }

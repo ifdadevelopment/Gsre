@@ -5,8 +5,6 @@ import User from "../../models/User";
 
 export async function POST(req) {
   try {
-    console.log("REGISTER API HIT");
-
     await connectDB();
 
     const { name, email, password, confirmPassword } = await req.json();
