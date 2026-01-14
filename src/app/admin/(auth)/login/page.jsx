@@ -34,12 +34,10 @@ export default function AdminAuth() {
 
     try {
       if (tab === "login") {
-        const { data } = await axiosInstance.post("/api/auth/login", {
+        await axiosInstance.post("/api/auth/login", {
           email: form.email.trim().toLowerCase(),
           password: form.password,
         });
-
-        document.cookie = `token=${data.token}; path=/`;
         router.replace("/admin/dashboard");
       } else {
         await axiosInstance.post("/api/auth/register", {
@@ -83,11 +81,10 @@ export default function AdminAuth() {
                   setTab(t);
                   setError("");
                 }}
-                className={`pb-2 text-sm font-medium transition ${
-                  tab === t
-                    ? "border-b-2 border-black text-black"
-                    : "text-gray-400 hover:text-black"
-                }`}
+                className={`pb-2 text-sm font-medium transition ${tab === t
+                  ? "border-b-2 border-black text-black"
+                  : "text-gray-400 hover:text-black"
+                  }`}
               >
                 {t === "login" ? "Sign In" : "Sign Up"}
               </button>
@@ -183,8 +180,8 @@ export default function AdminAuth() {
             {loading
               ? "Please wait..."
               : tab === "login"
-              ? "Sign In"
-              : "Create Account"}
+                ? "Sign In"
+                : "Create Account"}
           </button>
         </form>
       </div>

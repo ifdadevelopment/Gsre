@@ -237,7 +237,7 @@ export default function Contacts() {
                       <p><b>Status:</b> {h.status}</p>
                       <p><b>Remark:</b> {h.remark || "—"}</p>
                       <p className="text-xs text-gray-500">
-                        {new Date(h.updatedAt).toLocaleString()}
+                        {new Date(h.updatedAt).toISOString().replace("T", " ").slice(0, 19)}
                       </p>
                     </li>
                   ))}

@@ -53,7 +53,7 @@ const TestimonialSection = () => {
     <section className="py-16 max-w-6xl mx-auto px-4  overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
             What Our Clients Say
           </h2>
           <p className="text-gray-600 font-semibold mt-2">

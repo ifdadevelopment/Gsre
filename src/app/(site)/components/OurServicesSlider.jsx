@@ -1,21 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { services } from "@/app/(site)/data/services";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function OurServicesSlider() {
   const [mounted, setMounted] = useState(false);
-
+  const trackRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const [showArrows, setShowArrows] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; 
-
+  if (!mounted) return null;
   const marqueeServices = [...services, ...services];
+  const slide = (dir) => {
+    const track = trackRef.current;
+    if (!track) return;
 
+    const card = track.children[0];
+    const cardWidth = card.offsetWidth;
+
+    track.style.transition = "transform 0.5s ease";
+    track.style.transform = `translateX(${dir * cardWidth}px)`;
+
+    setTimeout(() => {
+      track.style.transition = "none";
+      track.style.transform = "translateX(0)";
+    }, 500);
+  };
   return (
     <section className="py-16 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
@@ -27,9 +42,15 @@ export default function OurServicesSlider() {
             Our Services
           </h2>
         </div>
-
-        <div className="relative overflow-hidden py-4">
-          <div className="flex animate-marquee">
+        <div
+          className="relative overflow-hidden py-4 group"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+            ref={trackRef}
+            className={`flex ${paused ? "" : "animate-marquee"}`}
+          >
             {marqueeServices.map((service, index) => (
               <div
                 key={`${service.slug}-${index}`}
@@ -46,9 +67,6 @@ export default function OurServicesSlider() {
                       src={service.image}
                       alt={service.title}
                       fill
-                      sizes="(max-width: 640px) 100vw,
-                             (max-width: 1024px) 50vw,
-                             33vw"
                       quality={90}
                       className="object-cover transition-transform duration-500"
                     />
@@ -72,8 +90,44 @@ export default function OurServicesSlider() {
               </div>
             ))}
           </div>
-        </div>
+          <button
+            onClick={() => slide(1)}
+            className="
+    absolute left-3 top-1/2 -translate-y-1/2 z-20
+    bg-white text-black
+    w-10 h-10 rounded-full
+    flex items-center justify-center
+    shadow-lg
 
+    opacity-80
+    md:opacity-0
+    md:group-hover:opacity-100
+
+    transition-opacity duration-300
+  "
+          >
+            ‹
+          </button>
+          <button
+            onClick={() => slide(-1)}
+            className="
+    absolute right-3 top-1/2 -translate-y-1/2 z-20
+    bg-white text-black
+    w-10 h-10 rounded-full
+    flex items-center justify-center
+    shadow-lg
+
+    opacity-80
+    md:opacity-0
+    md:group-hover:opacity-100
+
+    transition-opacity duration-300
+  "
+          >
+            ›
+          </button>
+
+        </div>
       </div>
     </section>
   );
