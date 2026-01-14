@@ -8,6 +8,25 @@ const ContactSchema = new mongoose.Schema(
     service: { type: String, required: true },
     message: { type: String, required: true },
     reminder: { type: [String], default: [] },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "completed", "cancelled"],
+      default: "pending",
+    },
+    remark: {
+      type: String,
+      default: "",
+    },
+    updateHistory: [
+      {
+        status: String,
+        remark: String,
+        updatedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
