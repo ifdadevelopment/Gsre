@@ -26,8 +26,8 @@ export async function POST(req) {
       );
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
       return NextResponse.json(
         { success: false, message: "Invalid credentials" },
         { status: 401 }
@@ -40,9 +40,9 @@ export async function POST(req) {
       { expiresIn: "1d" }
     );
 
-    const response = NextResponse.json({
+    return NextResponse.json({
       success: true,
-      message: "Login successful",
+      token,
       user: {
         id: user._id,
         name: user.name,
@@ -50,19 +50,9 @@ export async function POST(req) {
         user_type: user.user_type,
       },
     });
-
-    response.cookies.set("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",   
-      path: "/",
-      maxAge: 60 * 60 * 24,
-    });
-
-    return response;
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: "Server error" },
+      { success: false, message: error.message },
       { status: 500 }
     );
   }
