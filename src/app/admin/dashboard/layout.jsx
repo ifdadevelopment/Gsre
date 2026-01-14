@@ -32,7 +32,7 @@ export default function AdminLayout({ children }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100 overflow-y-hidden">
       <aside
         className="text-gray-200 flex flex-col w-16 sm:w-20 md:w-64 transition-all duration-300 bg-gradient-to-b from-[#0f2027] via-[#203a43] to-[#2c5364] shadow-xl"
       >

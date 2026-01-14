@@ -124,8 +124,21 @@ export default function LatestWork() {
                       alt={item.name}
                       width={600}
                       height={450}
-                      className="w-full h-[320px] md:h-[420px] object-cover"
+                      sizes="100vh"
+                      quality={100}
+                      priority
+                      className="w-full h-[320px] md:h-[420px] object-cover contrast-105"
                     />
+                    {/* <Image
+  src={item.image}
+  alt={item.name}
+  width={600}
+  height={420}
+  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+  quality={85}
+  loading="lazy"
+  className="w-full h-auto object-cover contrast-105"
+/> */}
 
                     <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-lg p-4 flex items-center justify-between">
                       <div>

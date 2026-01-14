@@ -17,6 +17,8 @@ const STATUS_OPTIONS = [
   "cancelled",
 ];
 
+const ITEMS_PER_PAGE = 15;
+
 export default function Contacts() {
   const [mounted, setMounted] = useState(false);
 
@@ -24,9 +26,12 @@ export default function Contacts() {
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
   const [viewContact, setViewContact] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     setMounted(true);
   }, []);
+
   const fetchContacts = async () => {
     try {
       const res = await fetch("/api/contacts", { cache: "no-store" });
@@ -42,6 +47,7 @@ export default function Contacts() {
   useEffect(() => {
     if (mounted) fetchContacts();
   }, [mounted]);
+
   const saveUpdate = async (contact) => {
     try {
       const res = await fetch(`/api/contacts/${contact._id}`, {
@@ -66,6 +72,7 @@ export default function Contacts() {
       toast.error("Update failed");
     }
   };
+
   const deleteContact = async (id) => {
     if (!confirm("Delete this contact?")) return;
 
@@ -85,8 +92,9 @@ export default function Contacts() {
       toast.error("Delete failed");
     }
   };
-  const formatIndianDate = (date) => {
-    return new Intl.DateTimeFormat("en-IN", {
+
+  const formatIndianDate = (date) =>
+    new Intl.DateTimeFormat("en-IN", {
       day: "2-digit",
       month: "short",
       year: "numeric",
@@ -94,7 +102,13 @@ export default function Contacts() {
       minute: "2-digit",
       hour12: true,
     }).format(new Date(date));
-  };
+
+  const totalPages = Math.ceil(contacts.length / ITEMS_PER_PAGE);
+
+  const paginatedContacts = contacts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   if (!mounted) return null;
   if (loading) return <p>Loading contacts...</p>;
@@ -118,12 +132,14 @@ export default function Contacts() {
           </thead>
 
           <tbody>
-            {contacts.map((contact, index) => {
+            {paginatedContacts.map((contact, index) => {
               const isEditing = editingId === contact._id;
 
               return (
                 <tr key={contact._id} className="hover:bg-gray-50">
-                  <td className="border px-3 py-2">{index + 1}</td>
+                  <td className="border px-3 py-2">
+                    {(currentPage - 1) * ITEMS_PER_PAGE + index + 1}
+                  </td>
                   <td className="border px-3 py-2">{contact.fullName}</td>
                   <td className="border px-3 py-2">{contact.phone}</td>
                   <td className="border px-3 py-2">{contact.service}</td>
@@ -174,21 +190,21 @@ export default function Contacts() {
                     )}
                   </td>
 
-                  <td className="border px-3 py-2 text-center space-x-3">
-                    <button onClick={() => setViewContact(contact)}>
-                      <FaEye />
+                  <td className="border md:px-3 md:py-2 px-0 py-0 text-center space-x-3">
+                    <button onClick={() => setViewContact(contact)} className="md:text-lg text-sm">
+                      <FaEye  />
                     </button>
 
                     {isEditing ? (
                       <button
-                        className="text-green-600"
+                        className="text-green-600 md:text-lg text-sm"
                         onClick={() => saveUpdate(contact)}
                       >
                         <FaSave />
                       </button>
                     ) : (
                       <button
-                        className="text-blue-600"
+                        className="text-blue-600 md:text-lg text-sm"
                         onClick={() => setEditingId(contact._id)}
                       >
                         <FaEdit />
@@ -196,7 +212,7 @@ export default function Contacts() {
                     )}
 
                     <button
-                      className="text-red-600"
+                      className="text-red-600 md:text-lg text-sm"
                       onClick={() => deleteContact(contact._id)}
                     >
                       <FaTrash />
@@ -208,9 +224,46 @@ export default function Contacts() {
           </tbody>
         </table>
       </div>
+
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-6 gap-2 flex-wrap">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => p - 1)}
+            className="px-3 py-1 border rounded disabled:opacity-40"
+          >
+            Prev
+          </button>
+
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-3 py-1 border rounded ${
+                currentPage === i + 1
+                  ? "bg-black text-white"
+                  : "bg-white"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => p + 1)}
+            className="px-3 py-1 border rounded disabled:opacity-40"
+          >
+            Next
+          </button>
+        </div>
+      )}
+
+      {/* VIEW MODAL */}
       {viewContact && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-white max-w-lg w-full p-6 rounded-lg relative max-h-[90vh] overflow-y-auto">
+          <div className="bg-white max-w-lg w-full md:p-6 p-2 rounded-lg relative max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setViewContact(null)}
               className="absolute top-3 right-3"

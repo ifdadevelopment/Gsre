@@ -4,13 +4,12 @@ import jwt from "jsonwebtoken";
 import { connectDB } from "../../lib/Db";
 import User from "../../models/User";
 
+
+
 export async function POST(req) {
   try {
     await connectDB();
 
-    if (!process.env.JWT_SECRET) {
-      throw new Error("JWT_SECRET is not defined");
-    }
     const { email, password } = await req.json();
 
     if (!email || !password) {
@@ -53,8 +52,6 @@ export async function POST(req) {
       },
     });
   } catch (error) {
-    console.error("LOGIN ERROR:", error.message);
-
     return NextResponse.json(
       { success: false, message: error.message },
       { status: 500 }

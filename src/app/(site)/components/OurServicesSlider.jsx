@@ -67,12 +67,14 @@ export default function OurServicesSlider() {
                       src={service.image}
                       alt={service.title}
                       fill
-                      quality={90}
-                      className="object-cover transition-transform duration-500"
+                      sizes="100vh"
+                      quality={100}
+                      priority
+                      className="w-full h-[320px] md:h-[420px] object-cover contrast-105"
                     />
 
                     <div className="absolute inset-0 bg-black/40 flex items-end">
-                      <div className="bg-white/95 p-4 w-full backdrop-blur-sm">
+                      <div className="bg-white/95 p-4 w-full ">
                         <p className="text-xs global-color font-bold">
                           {service.subtitle}
                         </p>
