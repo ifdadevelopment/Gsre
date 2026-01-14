@@ -69,13 +69,10 @@ export default function AdminAuth() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <div className="w-[360px] rounded-xl bg-white text-black shadow-xl">
-        {/* Header */}
         <div className="px-8 pt-6">
           <h1 className="text-2xl font-semibold text-center">
             {tab === "login" ? "Admin Login" : "Create Admin Account"}
           </h1>
-
-          {/* Tabs */}
           <div className="flex justify-center gap-8 mt-4 ">
             {["login", "signup"].map((t) => (
               <button
