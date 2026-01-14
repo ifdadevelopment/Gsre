@@ -341,7 +341,16 @@ export const galleryImages = [
     alt: "HVAC System Design and Installation",
   },
   {
-    src: "/services/centralized.jpg",
+    src: "/services/Centralized.jpg",
     alt: "Centralized Air Conditioning System",
   },
+];
+export const BRANDS = [
+  { name: "O General", src: "/sales/general.png" },
+  { name: "Panasonic", src: "/sales/panasonic.png" },
+  { name: "Carrier", src: "/sales/carrier.png" },
+  { name: "Voltas", src: "/sales/voltas.png" },
+  { name: "Mitsubishi Electric", src: "/sales/mitsubi.png" },
+  { name: "Hitachi", src: "/sales/hitachi.png" },
+  { name: "Daikin", src: "/sales/daikain.png" },
 ];

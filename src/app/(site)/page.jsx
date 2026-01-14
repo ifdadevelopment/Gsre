@@ -2,6 +2,7 @@ import AboutInfo from "./components/AboutInfo";
 import ContactInfo from "./components/ContactInfo";
 import HomeCarousel from "./components/HomeCarousel";
 import LatestWork from "./components/LatestWork";
+import OurBrands from "./components/OurBrands";
 import OurClients from "./components/OurClients";
 import OurServicesSlider from "./components/OurServicesSlider";
 import TeamSlider from "./components/TeamSlider";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <AboutInfo/>
       <OurServicesSlider />
       <LatestWork />
+      <OurBrands />
       <TeamSlider />
       <TestimonialSection />
       <OurClients />
