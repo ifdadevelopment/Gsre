@@ -18,12 +18,15 @@ const STATUS_OPTIONS = [
 ];
 
 export default function Contacts() {
+  const [mounted, setMounted] = useState(false);
+
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
   const [viewContact, setViewContact] = useState(null);
-
-  /* FETCH */
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const fetchContacts = async () => {
     try {
       const res = await fetch("/api/contacts", { cache: "no-store" });
@@ -37,10 +40,8 @@ export default function Contacts() {
   };
 
   useEffect(() => {
-    fetchContacts();
-  }, []);
-
-  /* UPDATE */
+    if (mounted) fetchContacts();
+  }, [mounted]);
   const saveUpdate = async (contact) => {
     try {
       const res = await fetch(`/api/contacts/${contact._id}`, {
@@ -65,8 +66,6 @@ export default function Contacts() {
       toast.error("Update failed");
     }
   };
-
-  /* DELETE */
   const deleteContact = async (id) => {
     if (!confirm("Delete this contact?")) return;
 
@@ -86,7 +85,18 @@ export default function Contacts() {
       toast.error("Delete failed");
     }
   };
+  const formatIndianDate = (date) => {
+    return new Intl.DateTimeFormat("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }).format(new Date(date));
+  };
 
+  if (!mounted) return null;
   if (loading) return <p>Loading contacts...</p>;
 
   return (
@@ -118,7 +128,6 @@ export default function Contacts() {
                   <td className="border px-3 py-2">{contact.phone}</td>
                   <td className="border px-3 py-2">{contact.service}</td>
 
-                  {/* STATUS */}
                   <td className="border px-3 py-2">
                     {isEditing ? (
                       <select
@@ -143,7 +152,6 @@ export default function Contacts() {
                     )}
                   </td>
 
-                  {/* REMARK */}
                   <td className="border px-3 py-2">
                     {isEditing ? (
                       <input
@@ -166,7 +174,6 @@ export default function Contacts() {
                     )}
                   </td>
 
-                  {/* ACTIONS */}
                   <td className="border px-3 py-2 text-center space-x-3">
                     <button onClick={() => setViewContact(contact)}>
                       <FaEye />
@@ -201,8 +208,6 @@ export default function Contacts() {
           </tbody>
         </table>
       </div>
-
-      {/* VIEW MODAL */}
       {viewContact && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
           <div className="bg-white max-w-lg w-full p-6 rounded-lg relative max-h-[90vh] overflow-y-auto">
@@ -237,7 +242,7 @@ export default function Contacts() {
                       <p><b>Status:</b> {h.status}</p>
                       <p><b>Remark:</b> {h.remark || "—"}</p>
                       <p className="text-xs text-gray-500">
-                        {new Date(h.updatedAt).toISOString().replace("T", " ").slice(0, 19)}
+                        {formatIndianDate(h.updatedAt)}
                       </p>
                     </li>
                   ))}
