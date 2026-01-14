@@ -21,6 +21,7 @@ export default function AdminAuth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -34,19 +35,20 @@ export default function AdminAuth() {
 
     try {
       if (tab === "login") {
-        await axiosInstance.post("/api/auth/login", {
-          email: form.email.trim().toLowerCase(),
+        const { data } = await axiosInstance.post("/api/auth/login", {
+          email: form.email,
           password: form.password,
         });
+
+        document.cookie = `token=${data.token}; path=/`;
         router.replace("/admin/dashboard");
       } else {
         await axiosInstance.post("/api/auth/register", {
-          name: form.name.trim(),
-          email: form.email.trim().toLowerCase(),
+          name: form.name,
+          email: form.email,
           password: form.password,
           confirmPassword: form.confirmPassword,
         });
-
         setTab("login");
         setForm({
           name: "",
@@ -55,8 +57,10 @@ export default function AdminAuth() {
           confirmPassword: "",
         });
       }
-    } catch (err) {
-      setError(err?.response?.data?.message || "Something went wrong");
+    } catch (error) {
+      setError(
+        error?.response?.data?.message || "Server error"
+      );
     } finally {
       setLoading(false);
     }
