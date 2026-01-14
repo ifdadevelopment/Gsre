@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
-   images: {
-    qualities: [75, 90, 100], 
+    images: {
+    qualities: [75, 90, 95, 100],
   },
 };
 

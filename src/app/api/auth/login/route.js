@@ -11,7 +11,6 @@ export async function POST(req) {
     if (!process.env.JWT_SECRET) {
       throw new Error("JWT_SECRET is not defined");
     }
-
     const { email, password } = await req.json();
 
     if (!email || !password) {
