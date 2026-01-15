@@ -18,12 +18,9 @@ export default function LatestWork() {
   const [mounted, setMounted] = useState(false);
   const intervalRef = useRef(null);
 
-  /* MOUNT FLAG (prevents hydration issues) */
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  /* RESPONSIVE CARDS COUNT */
   useEffect(() => {
     if (!mounted) return;
 
@@ -36,7 +33,6 @@ export default function LatestWork() {
     return () => window.removeEventListener("resize", updateView);
   }, [mounted]);
 
-  /* AUTO SLIDE */
   useEffect(() => {
     if (!mounted) return;
 
@@ -49,8 +45,6 @@ export default function LatestWork() {
 
   const next = () => setIndex((prev) => prev + 1);
   const prev = () => setIndex((prev) => prev - 1);
-
-  /* INFINITE RESET */
   useEffect(() => {
     if (!mounted) return;
 
@@ -68,8 +62,6 @@ export default function LatestWork() {
       }, 700);
     }
   }, [index, cardsPerView, slides.length, mounted]);
-
-  /* RE-ENABLE TRANSITION */
   useEffect(() => {
     if (!mounted) return;
 
@@ -83,7 +75,6 @@ export default function LatestWork() {
   return (
     <section className="bg-[#0b1220] py-16">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Header */}
         <div className="mb-10">
           <p className="text-sm text-white/70 tracking-widest uppercase">
             Latest Project
@@ -92,8 +83,6 @@ export default function LatestWork() {
             Our Latest Work
           </h2>
         </div>
-
-        {/* SLIDER */}
         <div
           className="relative overflow-hidden group"
           onMouseEnter={() => clearInterval(intervalRef.current)}
@@ -103,7 +92,6 @@ export default function LatestWork() {
             }, 3500);
           }}
         >
-          {/* TRACK */}
           <div
             className={`flex ${transition ? "transition-transform duration-700 ease-in-out" : ""
               }`}
@@ -173,10 +161,10 @@ export default function LatestWork() {
     absolute left-3 top-1/2 -translate-y-1/2
     z-20
     bg-white/90 hover:bg-white
-    text-black text-2xl
-    w-10 h-10 rounded-full
+    text-black text-xl md:text-3xl
+    md:w-10 md:h-10 h-8 w-8 rounded-full
     flex items-center justify-center
-    shadow-lg
+    shadow-lg  font-semibold
   "
           >
             ‹
@@ -192,10 +180,10 @@ export default function LatestWork() {
     absolute right-3 top-1/2 -translate-y-1/2
     z-20
     bg-white/90 hover:bg-white
-    text-black text-2xl
-    w-10 h-10 rounded-full
+    text-black text-xl md:text-3xl
+    md:w-10 md:h-10 h-8 w-8 rounded-full
     flex items-center justify-center
-    shadow-lg
+    shadow-lg  font-semibold
   "
           >
             ›

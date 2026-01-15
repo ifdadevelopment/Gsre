@@ -1,6 +1,18 @@
+import {
+  FaCog,
+  FaRegCheckCircle,
+  FaRecycle,
+  FaLightbulb,
+  FaUsers,
+  FaMapSigns,
+} from "react-icons/fa";
+
+
+
 
 export const services = [
   {
+    id: 1,
     title: "Maintenance & Repairs",
     slug: "maintenance-repairs",
     subtitle: "GS Refrigeration Enterprises",
@@ -20,6 +32,7 @@ export const services = [
       "Complete HVAC maintenance and repair services ensuring optimal performance and system longevity.",
   },
   {
+    id: 2,
     title: "Chiller & Ventilation Systems",
     slug: "chiller-ventilation",
     subtitle: "GS Refrigeration Enterprises",
@@ -39,6 +52,7 @@ export const services = [
       "Advanced chiller and ventilation system solutions for industrial and commercial spaces.",
   },
   {
+    id: 3,
     title: "AMC Services",
     slug: "amc-services",
     subtitle: "GS Refrigeration Enterprises",
@@ -58,6 +72,7 @@ export const services = [
       "Annual maintenance contracts designed to minimize downtime and maximize efficiency.",
   },
   {
+    id: 4,
     title: "HVAC System Design",
     slug: "hvac-system-design",
     subtitle: "GS Refrigeration Enterprises",
@@ -77,6 +92,7 @@ export const services = [
       "Custom HVAC system design engineered for performance, cost efficiency, and compliance.",
   },
   {
+    id: 5,
     title: "Industrial Cooling",
     slug: "industrial-cooling",
     subtitle: "GS Refrigeration Enterprises",
@@ -136,7 +152,23 @@ export const testimonials = [
     image: "/images/client3.jpg",
   },
 ];
-
+export const slides = [
+  {
+    video: "/videos/slide1.mp4",
+    title: "HVACR Engineering Excellence",
+    subtitle: "Precision-driven cooling & ventilation systems",
+  },
+  {
+    video: "/videos/slide2.mp4",
+    title: "Efficient Cooling Solutions",
+    subtitle: "Energy-optimized HVACR for modern infrastructure",
+  },
+  {
+    video: "/videos/slide3.mp4",
+    title: "Industrial & Commercial Projects",
+    subtitle: "Scalable HVACR systems for large facilities",
+  },
+];
 export const projects = [
   {
     id: 1,
@@ -353,4 +385,49 @@ export const BRANDS = [
   { name: "Mitsubishi Electric", src: "/sales/mitsubi.png" },
   { name: "Hitachi", src: "/sales/hitachi.png" },
   { name: "Daikin", src: "/sales/daikain.png" },
+];
+
+export const ServiceObjectives = [
+  {
+    id: 1,
+    icon: <FaCog size={50} />,
+    title: "Deliver Quality HVAC Solutions",
+    description:
+      "To design, install, and maintain high-performance HVAC systems that meet the highest standards of quality, safety, and efficiency.",
+  },
+  {
+    id: 2,
+    icon: <FaRegCheckCircle size={50} />,
+    title: "Ensure Customer Satisfaction",
+    description:
+      "To understand each client’s unique needs and provide personalized solutions that exceed expectations in performance, reliability, and support.",
+  },
+  {
+    id: 3,
+    icon: <FaRecycle size={50} />,
+    title: "Promote Energy Efficiency",
+    description:
+      "To integrate eco-friendly practices and energy-saving technologies into all projects, reducing environmental impact and operational costs for clients.",
+  },
+  {
+    id: 4,
+    icon: <FaLightbulb size={50} />,
+    title: "Foster Innovation",
+    description:
+      "To continuously upgrade our technical knowledge, adopt advanced tools, and explore new HVAC technologies that keep us ahead in the industry.",
+  },
+  {
+    id: 5,
+    icon: <FaUsers size={50} />,
+    title: "Build a Skilled Workforce",
+    description:
+      "To invest in training and development of our team, ensuring that they remain competent, certified, and motivated to deliver excellence.",
+  },
+  {
+    id: 6,
+    icon: <FaMapSigns size={50} />,
+    title: "Expand Our Reach",
+    description:
+      "To grow our presence across India by building strong partnerships and entering new markets while maintaining our high standards.",
+  },
 ];

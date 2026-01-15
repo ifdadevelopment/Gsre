@@ -8,8 +8,6 @@ export default function ProjectGallery({ images = [], title }) {
   const [isMobile, setIsMobile] = useState(false);
   const startX = useRef(0);
   const total = images.length;
-
-  /* RESPONSIVE CHECK */
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 640);
     check();
@@ -20,16 +18,12 @@ export default function ProjectGallery({ images = [], title }) {
   const gridLimit = isMobile ? 2 : 5;
   const gridImages = images.slice(0, gridLimit);
   const extraCount = total - gridLimit;
-
-  /* OPEN / CLOSE */
   const openPreview = (index) => {
     if (!total) return;
     setActiveIndex(index);
   };
 
   const closePreview = () => setActiveIndex(null);
-
-  /* ✅ HARDENED INFINITE SLIDE */
   const prevSlide = () => {
     setActiveIndex((prev) => {
       if (prev === null) return 0;
@@ -43,8 +37,6 @@ export default function ProjectGallery({ images = [], title }) {
       return (prev + 1) % total;
     });
   };
-
-  /* KEYBOARD */
   useEffect(() => {
     if (activeIndex === null) return;
 
@@ -57,8 +49,6 @@ export default function ProjectGallery({ images = [], title }) {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [activeIndex, total]);
-
-  /* TOUCH */
   const onTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
   };
@@ -71,7 +61,6 @@ export default function ProjectGallery({ images = [], title }) {
 
   return (
     <>
-      {/* GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {gridImages.map((img, i) => {
           const isMain = !isMobile && i === 0;
@@ -107,8 +96,6 @@ export default function ProjectGallery({ images = [], title }) {
           );
         })}
       </div>
-
-      {/* PREVIEW */}
       {activeIndex !== null && (
         <div className="fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-center">
           <button
@@ -145,8 +132,6 @@ export default function ProjectGallery({ images = [], title }) {
               className="object-contain contrast-105"
             />
           </div>
-
-          {/* THUMBNAILS */}
           <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory px-4 pb-4 w-full">
             {images.map((img, i) => (
               <div

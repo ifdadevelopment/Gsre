@@ -2,24 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
-const slides = [
-  {
-    video: "/videos/slide1.mp4",
-    title: "HVACR Engineering Excellence",
-    subtitle: "Precision-driven cooling & ventilation systems",
-  },
-  {
-    video: "/videos/slide2.mp4",
-    title: "Efficient Cooling Solutions",
-    subtitle: "Energy-optimized HVACR for modern infrastructure",
-  },
-  {
-    video: "/videos/slide3.mp4",
-    title: "Industrial & Commercial Projects",
-    subtitle: "Scalable HVACR systems for large facilities",
-  },
-];
+import { slides } from "../data/services";
 
 const HomeCarousel = () => {
   const [index, setIndex] = useState(0);
@@ -30,7 +13,6 @@ const HomeCarousel = () => {
   const nextSlide = () =>
     setIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
 
-  /* ✅ AUTO CHANGE EVERY 3 SECONDS */
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -41,8 +23,6 @@ const HomeCarousel = () => {
 
   return (
     <section className="relative w-full h-[300px] md:h-[600px] overflow-hidden">
-      
-      {/* VIDEO */}
       <video
         key={slides[index].video}
         src={slides[index].video}
@@ -52,20 +32,16 @@ const HomeCarousel = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       />
-
-      {/* OVERLAY */}
-      <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center px-4">
-        <div>
-          <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">
+      <div className="absolute inset-0 bg-black/50 flex px-4 ">
+        <div className="absolute md:bottom-50 bottom-20  md:left-20 left-4 text-left ">
+          <h2 className="text-xl md:text-6xl  max-w-3xl font-bold text-white mb-2">
             {slides[index].title}
           </h2>
-          <p className="text-sm md:text-lg text-gray-200 max-w-xl mx-auto">
+          <p className="text-sm md:text-lg text-gray-200 max-w-2xl">
             {slides[index].subtitle}
           </p>
         </div>
       </div>
-
-      {/* LEFT ARROW */}
       <button
         onClick={prevSlide}
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow"
@@ -73,8 +49,6 @@ const HomeCarousel = () => {
       >
         <FaChevronLeft />
       </button>
-
-      {/* RIGHT ARROW */}
       <button
         onClick={nextSlide}
         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow"
@@ -82,8 +56,6 @@ const HomeCarousel = () => {
       >
         <FaChevronRight />
       </button>
-
-      {/* DOTS */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <span

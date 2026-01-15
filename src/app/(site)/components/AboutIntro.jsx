@@ -1,12 +1,26 @@
 'use client';
 import Image from "next/image";
 import { galleryImages } from "@/app/(site)/data/services";
+
 export default function AboutIntro() {
-
-
     return (
         <section className="w-full py-16 bg-white font-Montserrat">
             <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-2 gap-2">
+                    {galleryImages.map((img, index) => (
+                        <div
+                            key={index}
+                            className={`relative w-full h-[260px] overflow-hidden rounded-md ${index === 0 || index === 2 ? 'absolute' : ''} ${index === 0 ? 'top-0 right-0' : ''} ${index === 2 ? 'top-0 left-0' : ''}`}
+                        >
+                            <Image
+                                src={img.src}
+                                alt={img.alt}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+                    ))}
+                </div>
                 <div>
                     <p className="global-color font-semibold mb-2">
                         About GS Refrigeration Enterprises
@@ -16,7 +30,7 @@ export default function AboutIntro() {
                         Trusted HVACR Solutions Provider
                     </h2>
 
-                    <div className="space-y-5 text-gray-600 text-[15px] leading-relaxed">
+                    <div className="space-y-5 text-gray-600 font-medium text-[15px] leading-relaxed">
                         <p>
                             <strong>GS Refrigeration Enterprises (GSRE)</strong> is a closely held
                             company established by <strong>Mr. Deepak Kumar</strong> in the year
@@ -34,7 +48,7 @@ export default function AboutIntro() {
 
                         <p>
                             We provide <strong>complete and reliable air conditioning solutions</strong>
-                            across all market segments — commercial, industrial, and institutional —
+                            across all market segments — commercial, industrial, and institutional — 
                             ensuring optimal performance at the most economical cost without
                             compromising on quality.
                         </p>
@@ -47,23 +61,6 @@ export default function AboutIntro() {
                         </p>
                     </div>
                 </div>
-
-                <div className="relative grid grid-cols-2 gap-6">
-                    {galleryImages.map((img, index) => (
-                        <div
-                            key={index}
-                            className="relative w-full h-[260px] overflow-hidden rounded-md"
-                        >
-                            <Image
-                                src={img.src}
-                                alt={img.alt}
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
-                    ))}
-                </div>
-
             </div>
         </section>
     );
